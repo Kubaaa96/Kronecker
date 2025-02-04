@@ -35,7 +35,7 @@ jobs:
     steps:
       - name: Install Dependencies
         run: | 
-          pip3 install conan gcovr
+          python3.13 -m pip install conan gcovr
           brew install cppcheck ccache clang-format
           export PATH=$(brew --prefix llvm@15)/bin:$PATH
 
