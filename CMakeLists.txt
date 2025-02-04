@@ -7,7 +7,7 @@ endif()
 
 # Add project_options from https://github.com/aminya/project_options
 # Change the version in the following URL to update the package (watch the releases of the repository for future updates)
-set(PROJECT_OPTIONS_VERSION "v0.36.1")
+set(PROJECT_OPTIONS_VERSION "v0.41.0")
 FetchContent_Declare(
         _project_options
         URL https://github.com/aminya/project_options/archive/refs/tags/${PROJECT_OPTIONS_VERSION}.zip)
@@ -20,7 +20,7 @@ run_conan(
         INSTALL_ARGS --build=missing
 )
 
-project(cpp-template VERSION 0.0.3 DESCRIPTION "Basic template project for C++ language" LANGUAGES CXX C)
+project(kronecker VERSION 0.0.3 DESCRIPTION "Basic template project for C++ language" LANGUAGES CXX C)
 
 set(CMAKE_CXX_STANDARD 20)
 
