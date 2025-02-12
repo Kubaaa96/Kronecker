@@ -20,25 +20,24 @@ run_conan(
         INSTALL_ARGS --build=missing
 )
 
-project(kronecker VERSION 0.0.3 DESCRIPTION "Basic template project for C++ language" LANGUAGES CXX C)
+project(kronecker VERSION 0.0.1 DESCRIPTION "Basic linear algebra library" LANGUAGES CXX C)
 
-set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_STANDARD 23)
 
 set(ENABLE_CLANG_TIDY "ENABLE_CLANG_TIDY")
 set(ENABLE_CPPCHECK "ENABLE_CPPCHECK")
 
 project_options(
-        PREFIX "cpptemplate"
+        PREFIX "kronecker"
         ENABLE_CACHE
         ${ENABLE_CPPCHECK}
         ${ENABLE_CLANG_TIDY}
          WARNINGS_AS_ERRORS
 )
-
-add_executable(${PROJECT_NAME} src/Example.cpp src/main.cpp)
+add_library(${PROJECT_NAME} SHARED src/Example.cpp)
 target_include_directories(${PROJECT_NAME} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include)
 target_link_libraries(${PROJECT_NAME}
-        PRIVATE cpptemplate_project_options cpptemplate_project_warnings
+        PRIVATE kronecker_project_options kronecker_project_warnings
 )
 
 target_find_dependencies(${PROJECT_NAME}
@@ -51,6 +50,12 @@ target_link_system_libraries(${PROJECT_NAME}
         fmt::fmt
 )
 
+include(app/CMakeLists.txt)
+
+target_link_system_libraries(${PROJECT_NAME}_app
+        PRIVATE
+        fmt::fmt
+)
 if(${CMAKE_BUILD_TYPE} STREQUAL "Debug")
     message(STATUS "Testing enabled")
     enable_testing()
