@@ -34,6 +34,11 @@ project_options(
         ${ENABLE_CLANG_TIDY}
          WARNINGS_AS_ERRORS
 )
+
+if (WIN32)
+    set(CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS ON)
+endif ()
+
 add_library(${PROJECT_NAME} SHARED src/Example.cpp)
 target_include_directories(${PROJECT_NAME} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include)
 target_link_libraries(${PROJECT_NAME}
