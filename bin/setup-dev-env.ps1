@@ -1,4 +1,4 @@
-$PROJECT_NAME="cpp-template"
+$PROJECT_NAME="kronecker"
 $DOCKER_NETWORK="172.202.1.0/24"
 $CONTAINER_IP="172.202.1.2"
 

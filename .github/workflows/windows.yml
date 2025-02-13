@@ -36,7 +36,7 @@ jobs:
         run : |
           echo "C:\ProgramData\chocolatey\bin" >> $env:GITHUB_PATH
           echo "C:\Program Files\Cppcheck" >> $env:GITHUB_PATH
-      #          Get-ChildItem -Path "${env:ProgramFiles}" | Where-Object {($_.Name -Like 'cppcheck*')} | % { $_.FullName }
+
       - name: Validate cppcheck
         run: |
           cmd /c "echo %PATH%"
@@ -63,16 +63,12 @@ jobs:
 
       - name: Build project
         working-directory: project
-        run: cmake --build ./build --config ${{ matrix.CONFIG.BUILD_TYPE }}
+        run:
+          cmake --build ./build --config ${{ matrix.CONFIG.BUILD_TYPE }}
 
       - name: Run tests
+        if: matrix.CONFIG.BUILD_TYPE == 'Debug'
         working-directory: project/build
-        run:
-          if ("${{ matrix.CONFIG.BUILD_TYPE }}" -eq "Debug")
-          {
+        run: |
           cd test;
-          ctest -C ${{ matrix.CONFIG.BUILD_TYPE }} --output-on-failure --timeout 540 }
-          else
-          {
-          Write-host "No test on Release Build type"
-          }
+          ctest -C ${{ matrix.CONFIG.BUILD_TYPE }} --output-on-failure --timeout 540

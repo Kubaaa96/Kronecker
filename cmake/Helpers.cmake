@@ -1,7 +1,7 @@
 function(package_add_test TESTNAME)
     cmake_parse_arguments(ARGS "${options}" "" "SOURCES;DEPENDS" ${ARGN})
     project_options(
-            PREFIX "cpptemplatetest"
+            PREFIX "kronecker_test"
             ENABLE_CACHE
             ${ENABLE_CPPCHECK}
             ${ENABLE_CLANG_TIDY}
@@ -9,7 +9,7 @@ function(package_add_test TESTNAME)
     )
     add_executable(${TESTNAME} ${ARGS_SOURCES})
     target_link_libraries(${TESTNAME}
-            PRIVATE cpptemplatetest_project_options cpptemplatetest_project_warnings
+            PRIVATE kronecker_test_project_options kronecker_test_project_warnings
     )
     target_include_directories(${TESTNAME} PUBLIC ${CMAKE_SOURCE_DIR}/include)
     find_and_link_libs(${TESTNAME})
@@ -23,12 +23,14 @@ function(find_and_link_libs TARGET_NAME)
     target_find_dependencies(${TARGET_NAME}
             PRIVATE_CONFIG
             fmt
+            spdlog
             GTest
     )
 
     target_link_system_libraries(${TARGET_NAME}
             PRIVATE
             fmt::fmt
+            spdlog::spdlog
             gtest::gtest
     )
 endfunction()

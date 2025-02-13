@@ -7,7 +7,7 @@ endif()
 
 # Add project_options from https://github.com/aminya/project_options
 # Change the version in the following URL to update the package (watch the releases of the repository for future updates)
-set(PROJECT_OPTIONS_VERSION "v0.36.1")
+set(PROJECT_OPTIONS_VERSION "v0.41.0")
 FetchContent_Declare(
         _project_options
         URL https://github.com/aminya/project_options/archive/refs/tags/${PROJECT_OPTIONS_VERSION}.zip)
@@ -20,7 +20,7 @@ run_conan(
         INSTALL_ARGS --build=missing
 )
 
-project(cpp-template VERSION 0.0.3 DESCRIPTION "Basic template project for C++ language" LANGUAGES CXX C)
+project(kronecker VERSION 0.0.1 DESCRIPTION "Basic linear algebra library" LANGUAGES CXX C)
 
 set(CMAKE_CXX_STANDARD 20)
 
@@ -28,28 +28,36 @@ set(ENABLE_CLANG_TIDY "ENABLE_CLANG_TIDY")
 set(ENABLE_CPPCHECK "ENABLE_CPPCHECK")
 
 project_options(
-        PREFIX "cpptemplate"
+        PREFIX "kronecker"
         ENABLE_CACHE
         ${ENABLE_CPPCHECK}
         ${ENABLE_CLANG_TIDY}
          WARNINGS_AS_ERRORS
 )
 
-add_executable(${PROJECT_NAME} src/Example.cpp src/main.cpp)
+if (WIN32)
+    set(CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS ON)
+endif ()
+
+add_library(${PROJECT_NAME} SHARED src/Example.cpp)
 target_include_directories(${PROJECT_NAME} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include)
 target_link_libraries(${PROJECT_NAME}
-        PRIVATE cpptemplate_project_options cpptemplate_project_warnings
+        PRIVATE kronecker_project_options kronecker_project_warnings
 )
 
 target_find_dependencies(${PROJECT_NAME}
         PRIVATE_CONFIG
         fmt
+        spdlog
 )
 
 target_link_system_libraries(${PROJECT_NAME}
         PRIVATE
         fmt::fmt
+        spdlog::spdlog
 )
+
+include(app/CMakeLists.txt)
 
 if(${CMAKE_BUILD_TYPE} STREQUAL "Debug")
     message(STATUS "Testing enabled")
