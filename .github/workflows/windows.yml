@@ -65,7 +65,6 @@ jobs:
         working-directory: project
         run: |
           pwd
-#          ls D:\a\Kronecker\Kronecker\project\build\Release
           cmake --build ./build --config ${{ matrix.CONFIG.BUILD_TYPE }}
 
       - name: Run tests
