@@ -65,6 +65,7 @@ jobs:
         run: cmake --build ./build --config ${{ matrix.CONFIG.BUILD_TYPE }}  --
 
       - name: Run tests
+        if: matrix.CONFIG.BUILD_TYPE == 'Debug'
         working-directory: project/build
         run:
           if [ "${{ matrix.CONFIG.BUILD_TYPE }}" == "Debug" ]; then
