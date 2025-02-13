@@ -69,6 +69,7 @@ jobs:
           if ("${{ matrix.CONFIG.BUILD_TYPE }}" -eq "Debug")
           {
           ls D:\a\Kronecker\Kronecker\project\build\Debug
+          }
           else
           {
           ls D:\a\Kronecker\Kronecker\project\build\Release
