@@ -71,4 +71,4 @@ jobs:
         working-directory: project/build
         run: |
           cd test;
-          ctest -C ${{ matrix.CONFIG.BUILD_TYPE }} --output-on-failure --timeout 540 }
+          ctest -C ${{ matrix.CONFIG.BUILD_TYPE }} --output-on-failure --timeout 540
