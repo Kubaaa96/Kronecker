@@ -65,7 +65,7 @@ jobs:
         working-directory: project
         run: |
           ls D:\a\Kronecker\Kronecker\project\build
-          cmake --build ./build --config ${{ matrix.CONFIG.BUILD_TYPE }} --target kronecker
+          cmake --build ./build --config ${{ matrix.CONFIG.BUILD_TYPE }}
           if ("${{ matrix.CONFIG.BUILD_TYPE }}" -eq "Debug")
           {
           ls D:\a\Kronecker\Kronecker\project\build\Debug
