@@ -64,8 +64,6 @@ jobs:
       - name: Build project
         working-directory: project
         run: |
-          pwd
-          ls D:\a\Kronecker\Kronecker\project
           ls D:\a\Kronecker\Kronecker\project\build
           cmake --build ./build --config ${{ matrix.CONFIG.BUILD_TYPE }}
 
