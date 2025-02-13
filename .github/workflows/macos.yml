@@ -67,9 +67,5 @@ jobs:
       - name: Run tests
         if: matrix.CONFIG.BUILD_TYPE == 'Debug'
         working-directory: project/build
-        run:
-          if [ "${{ matrix.CONFIG.BUILD_TYPE }}" == "Debug" ]; then
+        run: |
           cd test && ctest -C ${{ matrix.CONFIG.BUILD_TYPE }} --output-on-failure --timeout 540;
-          else
-          echo "No test on Release Build type";
-          fi
