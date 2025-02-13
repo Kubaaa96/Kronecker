@@ -23,12 +23,14 @@ function(find_and_link_libs TARGET_NAME)
     target_find_dependencies(${TARGET_NAME}
             PRIVATE_CONFIG
             fmt
+            spdlog
             GTest
     )
 
     target_link_system_libraries(${TARGET_NAME}
             PRIVATE
             fmt::fmt
+            spdlog::spdlog
             gtest::gtest
     )
 endfunction()

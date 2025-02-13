@@ -48,19 +48,17 @@ target_link_libraries(${PROJECT_NAME}
 target_find_dependencies(${PROJECT_NAME}
         PRIVATE_CONFIG
         fmt
+        spdlog
 )
 
 target_link_system_libraries(${PROJECT_NAME}
         PRIVATE
         fmt::fmt
+        spdlog::spdlog
 )
 
 include(app/CMakeLists.txt)
 
-target_link_system_libraries(${PROJECT_NAME}_app
-        PRIVATE
-        fmt::fmt
-)
 if(${CMAKE_BUILD_TYPE} STREQUAL "Debug")
     message(STATUS "Testing enabled")
     enable_testing()

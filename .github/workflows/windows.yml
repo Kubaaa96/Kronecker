@@ -36,7 +36,7 @@ jobs:
         run : |
           echo "C:\ProgramData\chocolatey\bin" >> $env:GITHUB_PATH
           echo "C:\Program Files\Cppcheck" >> $env:GITHUB_PATH
-      #          Get-ChildItem -Path "${env:ProgramFiles}" | Where-Object {($_.Name -Like 'cppcheck*')} | % { $_.FullName }
+
       - name: Validate cppcheck
         run: |
           cmd /c "echo %PATH%"
@@ -63,17 +63,8 @@ jobs:
 
       - name: Build project
         working-directory: project
-        run: |
-          ls D:\a\Kronecker\Kronecker\project\build
+        run:
           cmake --build ./build --config ${{ matrix.CONFIG.BUILD_TYPE }}
-          if ("${{ matrix.CONFIG.BUILD_TYPE }}" -eq "Debug")
-          {
-          ls D:\a\Kronecker\Kronecker\project\build\Debug
-          }
-          else
-          {
-          ls D:\a\Kronecker\Kronecker\project\build\Release
-          }
 
       - name: Run tests
         working-directory: project/build
